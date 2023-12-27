@@ -7,14 +7,24 @@
 html{
     height: 100%;
     width: 100%;
+    
 }
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+
 /*play area has two columns: container and controls*/
 .playArea{
-    display: flex;
-    flex-direction: row;
+    display: block;
     justify-content: space-between;
     height: 100%;
-    width: 100%;
+    width: 50%;
+    margin: auto;
 }
 
 .mainContainer{
@@ -30,17 +40,6 @@ html{
     border: 1px solid black;
 }
 
-.controls{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 40%;
-    padding: 5px;
-    margin: 10px;
-}
-
-
-
 .pixelRow{
     display: flex;
     flex-wrap: wrap;
@@ -49,9 +48,40 @@ html{
     margin: 0;
 }
 
-footer{
-    text-align: center; 
+.controls{
+    margin-bottom: 5px;
+}
+
+.dropdown{
+    width: 60px;
+    height: 30px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.btnControl{
+    width: 100px;
+    height: 35px;
+    margin: 5px;
+    padding: 5px;   
+}
+
+header{
+    top: 0px;
+    margin: 5px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+footer{  
     bottom: 0px;
     margin: 5px;
     margin-top: 20px;
+    
 }
+
+header, footer{
+    text-align: center;
+    height: 5vh;
+}
+
