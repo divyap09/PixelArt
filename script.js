@@ -72,6 +72,7 @@ document.addEventListener("click",function(e){
         console.log(undoStack);
     }
 
+
     if(undoStack.length > 0)
         document.getElementById("undoButton").disabled = false;
     else
@@ -107,7 +108,7 @@ function undoColor(){
 
     //pop last element from undoStack
     let lastPixel = undoStack.pop();
-    console.log(lastPixel.id + " " + lastPixel.color);
+
     //add it to redoStack
     redoStack.push(lastPixel);
     //change color of pixel
@@ -123,7 +124,7 @@ function redoColor(){
     //add it to undoStack
     undoStack.push(lastPixel);
     //change color of pixel
-    document.getElementById(lastPixel.id).style.backgroundColor = lastPixel.color == "black" ? "white" : "black";
+    document.getElementById(lastPixel.id).style.backgroundColor = lastPixel.color;
 }
 
 function ClearBoard(){
@@ -132,6 +133,7 @@ function ClearBoard(){
         buttons[i].style.backgroundColor = "white";
     }
     undoStack = [];
+    redoStack = [];
 }
 
 function SaveBoard(){
