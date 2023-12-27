@@ -1,8 +1,14 @@
 const size = document.getElementById("rows");
 const gridContainer = document.getElementById("gridContainer");
+var pixels = document.getElementsByClassName("pixel");
+undoStack = [];
+redoStack = [];
+
+//disable undo and redo buttons
+document.getElementById("undoButton").disabled = true;
+document.getElementById("redoButton").disabled = true;
 
 function generateGrid(){
-    console.log(size.value);
     //clear gridContainer
     gridContainer.innerHTML = "";
 
@@ -11,9 +17,12 @@ function generateGrid(){
         //create a div for each row
         let row = document.createElement("div");
         row.className = "pixelRow";
+        
         //create buttons for each row
         for(let j=0;j<size.value;j++){
             let button = document.createElement("button");
+            //button id = i*size+j
+            button.id = i*size.value+j;
             //button width and height
             if(size.value == 5){
                 button.style.width = "100px";
@@ -51,6 +60,28 @@ function generateGrid(){
 
 }
 
+//when pixel button is clicked, add it to undoStack
+
+document.addEventListener("click",function(e){
+    const target = e.target;
+    if(target.className == "pixel"){
+        var dict = {};
+        dict["id"] = target.id;
+        dict["color"] = target.style.backgroundColor;
+        undoStack.push(dict);
+        console.log(undoStack);
+    }
+
+    if(undoStack.length > 0)
+        document.getElementById("undoButton").disabled = false;
+    else
+        document.getElementById("undoButton").disabled = true;
+
+    if(redoStack.length > 0)
+        document.getElementById("redoButton").disabled = false;
+    else
+        document.getElementById("redoButton").disabled = true;
+});
 
 /*
 
@@ -70,11 +101,37 @@ for(let j=0;j<size.value;j++){
         }
 */
 
+function undoColor(){
+    if(undoStack.length == 0)
+        return;
+
+    //pop last element from undoStack
+    let lastPixel = undoStack.pop();
+    console.log(lastPixel.id + " " + lastPixel.color);
+    //add it to redoStack
+    redoStack.push(lastPixel);
+    //change color of pixel
+    document.getElementById(lastPixel.id).style.backgroundColor = lastPixel.color == "black" ? "white" : "black";
+}
+
+function redoColor(){
+    if(redoStack.length == 0)
+        return;
+
+    //pop last element from redoStack
+    let lastPixel = redoStack.pop();
+    //add it to undoStack
+    undoStack.push(lastPixel);
+    //change color of pixel
+    document.getElementById(lastPixel.id).style.backgroundColor = lastPixel.color == "black" ? "white" : "black";
+}
+
 function ClearBoard(){
     let buttons = document.getElementsByClassName("pixel");
     for(let i=0;i<buttons.length;i++){
         buttons[i].style.backgroundColor = "white";
     }
+    undoStack = [];
 }
 
 function SaveBoard(){

@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width= device-width, initial-scale=1.0">
     <title>Pixel Art</title>
     <link rel="stylesheet" href="styles.css">
     <!--Bootstrap link-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
+    
 </head>
 <body>
-
     <header>
         <h1>Pixel Art</h1>
     </header>
@@ -24,8 +28,10 @@
                             <option value="50">50</option>
                         </select> &nbsp; &nbsp;
                         <button class="btn button btnControl" id="generateButton" onclick="generateGrid();">Generate</button>
-                        <button class="btn button btnControl" id="clearButton" onclick="ClearBoard();">Clear Color</button>
+                        <button class="btn button btnControl" id="clearButton" onclick="ClearBoard();">Clear Grid</button>
                         <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
+                        <button class="btn button fa fa-undo" id="undoButton" onclick="undoColor();"></button>
+                        <button class="btn button fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>
         </div>
         <div class="mainContainer" id="gridContainer">
             <div class="container">
@@ -36,7 +42,7 @@
     </div>
     
     <footer>
-        <p>Pixel Art &copy; 2023</p>
+        <p>Pixel Art by Divya P &copy; 2023</p>
     </footer>
     <script src="script.js"></script>
 
