@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Art</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Pixel Art</h1>
+    </header>
+    <div class="playArea">
+        <div class="mainContainer" id="gridContainer">
+            <div class="container">
+                <!-- grid will be generated here -->
+            </div>
+        </div>
+        <div class="controls">
+            <!-- take input from the user to generate the matrix grid using dropdowns -->
+            <table id="controllers">
+                <tr><label for="rows">Grid size:</label>
+                    <select name="rows" id="rows">
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                    <button class="btn" id="generateButton" onclick="generateGrid();">Generate</button>
+                </tr>
+                <tr><button class="btn" id="clearButton" onclick="ClearBoard();">Clear</button></tr>
+                <tr><button class="btn" id="saveButton" onclick="SaveBoard();">Save</button></tr>
+            </table>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Pixel Art &copy; 2023</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

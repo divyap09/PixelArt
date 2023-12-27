@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    height: 100%;
+    width: 100%;
+}
+/*play area has two columns: container and controls*/
+.playArea{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.mainContainer{
+    width: 502px;
+    height: 502px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+}
+
+.pixel{
+    background-color: white;
+    border: 1px solid black;
+}
+
+.controls{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%;
+    padding: 5px;
+    margin: 10px;
+}
+
+
+
+.pixelRow{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    padding: 0;
+    margin: 0;
+}
+
+footer{
+    text-align: center; 
+    bottom: 0px;
+    margin: 5px;
+    margin-top: 20px;
+}
