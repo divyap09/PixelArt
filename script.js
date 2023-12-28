@@ -14,12 +14,41 @@ document.getElementById("redoButton").disabled = true;
 function generateGrid(){
     //clear gridContainer
     gridContainer.innerHTML = "";
-    var pixelSize = gridWidth/size.value;
     console.log(window.innerWidth)
     windowWidth = window.innerWidth;
-    if(windowWidth < 500){
-        pixelSize = windowWidth/size.value;
+
+    
+    var gridSize = 500;
+    var temp =2 ;
+    if (windowWidth > 1000)
+        temp = 4;
+
+    else if(windowWidth > 900)
+        temp = 2;
+
+    else if(windowWidth > 800)
+        temp = 2;
+
+    else if(windowWidth > 700)
+        temp = 2;
+
+    else if(windowWidth > 500)
+        temp = 2;
+    
+    else if(windowWidth > 400){
+        gridSize = 400;
+        temp = 2;
     }
+    else if(windowWidth > 300){
+        gridSize = 300;
+        temp = 2;
+    }
+
+    gridContainer.style.width = (gridSize+temp)+"px";
+    gridContainer.style.height = (gridSize+temp)+"px";
+
+    var pixelSize =  Math.ceil(gridSize/size.value);
+    console.log(pixelSize,gridSize, temp);
 
     
     //create size*size buttons and add them in gridContainer
@@ -148,3 +177,7 @@ function SaveBoard(){
         }
     });
 }
+
+window.onresize = function(event) {
+    generateGrid();
+};
