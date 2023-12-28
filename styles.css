@@ -77,6 +77,7 @@ body{
 
 .fa, .fas{
     width: 40px;
+    height: 35px;
 }
 
 .secondaryControls{
@@ -121,6 +122,15 @@ footer{
         height: 50px;
         padding-top: 1vh;
     }
+
+    .btnControl{
+        width: 80px;
+        height: 35px;
+        margin: 2px;
+        padding: 2px;   
+    }
+
+
 }
 
 @media only screen and (max-width: 600px), (max-height: 600px){
@@ -140,6 +150,14 @@ footer{
         width: 502px;
         border: 1px solid black;
     }
+
+    .btnControl{
+        width: 80px;
+        height: 35px;
+        margin: 2px;
+        padding: 2px;   
+    }
+
 
     header{
         height: 5vh;
