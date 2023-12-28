@@ -12,14 +12,15 @@
     
     
 </head>
-<body onload="generateGrid()">
+<body id ="mainScreen" onload="generateGrid()">
     <header>
         <h1>Pixel Art</h1>
     </header>
     <div class="playArea">
         <div class="controls">
             <!-- take input from the user to generate the matrix grid using dropdowns -->
-                        <label for="rows">Grid size:</label> &nbsp;
+            <div class="rowControl">
+                <label for="rows">Grid size:</label> &nbsp;
                         <select name="rows" id="rows" class="dropdown">
                             <option value="5" selected>5</option>
                             <option value="10">10</option>
@@ -27,16 +28,18 @@
                             <option value="25">25</option>
                             <option value="50">50</option>
                         </select> &nbsp; &nbsp;
-                        <button class="btn button btnControl" id="generateButton" onclick="generateGrid();">Generate</button>
-                        <button class="btn button btnControl" id="clearButton" onclick="ClearBoard();">Clear Grid</button>
-                        <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
-                        <button class="btn button fa fa-undo" id="undoButton" onclick="undoColor();"></button>
-                        <button class="btn button fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>
-        </div>
-        <div class="mainContainer" id="gridContainer">
-            <div class="container">
-                <!-- grid will be generated here -->
+                <button class="btn button btnControl" id="generateButton" onclick="generateGrid();">Generate</button>
+                <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
+                
+                        
             </div>
+            <div class="rowControl">
+                <button class="btn button btnControl" id="clearButton" onclick="ClearBoard();">Clear Grid</button>
+                <button class="btn button btnControl fa fa-undo" id="undoButton" onclick="undoColor();"></button>
+                <button class="btn button btnControl fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>
+            </div>
+        </div>
+        <div class="gridContainer" id="gridContainer">
         </div>
         
     </div>

@@ -7,6 +7,7 @@
 html{
     height: 100%;
     width: 100%;
+    text-align: center;
 }
 
 body{
@@ -14,23 +15,42 @@ body{
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
-    text-align: center;
 }
 
-/*play area has two columns: container and controls*/
+header{
+    top: 0px;
+    width: 100%;
+    margin-bottom: 5px;
+    height: 5vh;
+    position: static;
+    padding: 20px 1vh;
+}
+
+
 .playArea{
     display: block;
-    height: 100%;
-    width: 50%;
-    margin: auto;
+    position: relative;
+    top: 10vh;
+    height: 80vh;
+    width: 100%;
+    
 }
 
-.mainContainer{
-    width: 502px;
-    height: 502px;
+.playArea .controls{
+    display: block;
+    position: relative;
+    height: 10vh;
+}
+
+.gridContainer{
+    display: block;
+    position: relative;
+    top: 5vh;
     padding: 0;
-    margin: 0;
-    border: 1px solid black;
+    margin: auto;
+    height: 504px;
+    width: 504px;
+    border: 2px solid black;
 }
 
 .pixel{
@@ -47,6 +67,7 @@ body{
 
 .controls{
     margin-bottom: 5px;
+    height: 20px;
 }
 
 .dropdown{
@@ -63,18 +84,23 @@ body{
     padding: 5px;   
 }
 
-header{
-    top: 0px;
-    width: 100%;
-    margin-bottom: 5px;
+footer{
+    position: fixed;
     height: 5vh;
-    position: static;
+    bottom: 0vh;
+    width: 100%;  
 }
 
-footer{
-    padding: 0;
-    height: 5vh;
-    bottom: 0;
-    width: 100%;
+
+/*if the device is a mobile device, change the layout*/
+@media only screen and (max-width: 800px){
+    .container{
+        width: 100vw;
+        height: 90vh;
+        padding: 0;
+        margin: 0;
+        border: 1px solid black;
+    }
+
 }
 

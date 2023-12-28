@@ -1,6 +1,9 @@
 const size = document.getElementById("rows");
 const gridContainer = document.getElementById("gridContainer");
 var pixels = document.getElementsByClassName("pixel");
+
+const gridWidth = 500
+
 undoStack = [];
 redoStack = [];
 
@@ -11,7 +14,8 @@ document.getElementById("redoButton").disabled = true;
 function generateGrid(){
     //clear gridContainer
     gridContainer.innerHTML = "";
-
+    var pixelSize = gridWidth/size.value;
+    
     //create size*size buttons and add them in gridContainer
     for(let i=0;i<size.value;i++){
         //create a div for each row
@@ -23,27 +27,11 @@ function generateGrid(){
             let button = document.createElement("button");
             //button id = i*size+j
             button.id = i*size.value+j;
+
             //button width and height
-            if(size.value == 5){
-                button.style.width = "100px";
-                button.style.height = "100px";
-            }
-            else if(size.value == 10){
-                button.style.width = "50px";
-                button.style.height = "50px";
-            }
-            else if(size.value == 20){
-                button.style.width = "25px";
-                button.style.height = "25px";
-            }
-            else if(size.value == 25){
-                button.style.width = "20px";
-                button.style.height = "20px";
-            }
-            else if(size.value == 50){
-                button.style.width = "10px";
-                button.style.height = "10px";
-            }
+            button.style.width = pixelSize+"px";
+            button.style.height = pixelSize+"px";
+
             button.className = "pixel";
             button.addEventListener("click",function(){
                 if(button.style.backgroundColor == "black")
@@ -54,13 +42,8 @@ function generateGrid(){
             row.appendChild(button);
         }
         gridContainer.appendChild(row);
-
-
     }
-
 }
-
-//when pixel button is clicked, add it to undoStack
 
 document.addEventListener("click",function(e){
     const target = e.target;
