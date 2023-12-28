@@ -15,6 +15,12 @@ function generateGrid(){
     //clear gridContainer
     gridContainer.innerHTML = "";
     var pixelSize = gridWidth/size.value;
+    console.log(window.innerWidth)
+    windowWidth = window.innerWidth;
+    if(windowWidth < 500){
+        pixelSize = windowWidth/size.value;
+    }
+
     
     //create size*size buttons and add them in gridContainer
     for(let i=0;i<size.value;i++){

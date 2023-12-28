@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <!--Bootstrap link-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
     
@@ -17,7 +16,7 @@
     <header class="header">
         <h1>Pixel Art</h1>
     </header>
-    <div class="playArea">
+    <main class="playArea">
         <div class="controls">
             <!-- take input from the user to generate the matrix grid using dropdowns -->
             <div class="rowControl">
@@ -39,11 +38,14 @@
         </div>
         <div class="gridContainer" id="gridContainer">
         </div>
-        <div class="secondaryControls">
-            <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
+        <div class="controls">
+            <div class="secondaryControls">
+                <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
+            </div>
         </div>
         
-    </div>
+        
+    </main>
     
     <footer class="footer">
         <p>Pixel Art by Divya P &copy; 2023</p>
