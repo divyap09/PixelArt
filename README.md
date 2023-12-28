@@ -11,3 +11,7 @@ Future updates:
 1. allow multiple colors
 2. undo and redo buttons for ease of use
 3. able to save (download) the art
+
+
+References:
+1. To convert HTML element to canvas: https://www.youtube.com/watch?v=USODw0FUaMo
