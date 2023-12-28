@@ -5,10 +5,7 @@
 }
 
 html{
-    height: 100vh;
-    width: 100vw;
     text-align: center;
-    box-sizing: border-box;
 }
 
 body{
@@ -18,19 +15,17 @@ body{
     min-height: 100vh;
 }
 
-header{
-    top: 0px;
-    width: 100%;
-    margin-bottom: 5px;
-    height: 5vh;
-    position: fixed;
-    padding: 20px 1vh;
+.header{
+    position: relative;
+    top: 0;
+    height: 12vh;
+    width: 100vw;
 }
 
 .playArea{
     display: block;
     position: relative;
-    height: 80vh;
+    height: 75vh;
     width: 100%;
     
 }
@@ -46,7 +41,7 @@ header{
     position: relative;
     padding: 0;
     margin: auto;
-    height: 504px;
+    /*height: 504px;*/
     width: 504px;
     border: 2px solid black;
 }
@@ -65,7 +60,7 @@ header{
 
 .controls{
     margin-bottom: 5px;
-    height: 20px;
+    height: 10vh;
 }
 
 .dropdown{
@@ -82,11 +77,27 @@ header{
     padding: 5px;   
 }
 
-footer{
+.fa, .fas{
+    width: 40px;
+}
+
+.secondaryControls{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    position: relative;
+}
+
+.footer{
+    display: block;
     position: fixed;
-    height: 5vh;
     bottom: 0;
-    width: 100%;  
+    height: 5vh;
+    width: 100vw;
+    background-color: black;
+    color: white;
 }
 
 

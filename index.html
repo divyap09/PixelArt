@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
     
     
 </head>
 <body id ="mainScreen" onload="generateGrid()">
-    <header>
+    <header class="header">
         <h1>Pixel Art</h1>
     </header>
     <div class="playArea">
@@ -29,22 +30,22 @@
                             <option value="50">50</option>
                         </select> &nbsp; &nbsp;
                 <button class="btn button btnControl" id="generateButton" onclick="generateGrid();">Generate</button>
-                <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
-                
-                        
-            </div>
-            <div class="rowControl">
                 <button class="btn button btnControl" id="clearButton" onclick="ClearBoard();">Clear Grid</button>
                 <button class="btn button btnControl fa fa-undo" id="undoButton" onclick="undoColor();"></button>
-                <button class="btn button btnControl fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>
+                <button class="btn button btnControl fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>      
             </div>
+            <div class="rowControl">
+                </div>
         </div>
         <div class="gridContainer" id="gridContainer">
+        </div>
+        <div class="secondaryControls">
+            <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
         </div>
         
     </div>
     
-    <footer>
+    <footer class="footer">
         <p>Pixel Art by Divya P &copy; 2023</p>
     </footer>
     <script src="script.js"></script>

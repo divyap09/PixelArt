@@ -65,6 +65,12 @@ document.addEventListener("click",function(e){
         document.getElementById("redoButton").disabled = false;
     else
         document.getElementById("redoButton").disabled = true;
+
+    if(undoStack.length > 0)
+        document.getElementById("saveButton").disabled = false;
+    else
+        document.getElementById("saveButton").disabled = true;
+
 });
 
 /*
@@ -124,10 +130,15 @@ function SaveBoard(){
     //convert gridContainer to canvas
     html2canvas(gridContainer,{
         onrendered: function(canvas){
-            //add canvas to body
-            document.body.appendChild(canvas);
-            //save canvas as png
-            Canvas2Image.saveAsPNG(canvas);
+
+            var image = canvas.toDataURL("image/jpg");
+            var renderedImg = image.replace(/^data:image\/jpg/,"data:application/octet-stream");
+
+            //download image
+            var link = document.createElement("a");
+            link.download = "pixelImage.jpg";
+            link.href = renderedImg;
+            link.click();
         }
     });
 }
