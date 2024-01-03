@@ -6,11 +6,12 @@ The main idea behind developing is, whenever I used to feel stressed I used to c
 Current features:
 1. able to generate a matrix dynamically with fixed size
 2. by default only black color can be used
+3. able to save (download) the art
+4. allow multiple colors
+5. undo and redo buttons for ease of use
 
 Future updates:
-1. allow multiple colors
-2. undo and redo buttons for ease of use
-3. able to save (download) the art
+1. responsive layout for different screens
 
 
 References:
