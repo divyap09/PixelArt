@@ -1,7 +1,7 @@
 const size = document.getElementById("rows");
 const gridContainer = document.getElementById("gridContainer");
 var pixels = document.getElementsByClassName("pixel");
-
+var colorPicker = document.getElementById("colorPicker");
 const gridWidth = 500
 
 undoStack = [];
@@ -10,6 +10,8 @@ redoStack = [];
 //disable undo and redo buttons
 document.getElementById("undoButton").disabled = true;
 document.getElementById("redoButton").disabled = true;
+
+var isGeneratedOnload = true;
 
 function generateGrid(){
     //clear gridContainer
@@ -59,12 +61,29 @@ function generateGrid(){
             button.style.height = pixelSize+"px";
 
             button.className = "pixel";
+            console.log(colorPicker.value);
+            
+            
+
+            if(isGeneratedOnload){
+                button.style.backgroundColor = "white";
+                isGeneratedOnload = false;
+            }
+            else{
+                //button.style.backgroundColor = document.getElementById("colorPicker").value;
+                button.addEventListener("click",function(){
+                    button.style.backgroundColor = document.getElementById("colorPicker").value;
+                });
+            }
+            /*
             button.addEventListener("click",function(){
                 if(button.style.backgroundColor == "black")
                     button.style.backgroundColor = "white";
                 else
                 button.style.backgroundColor = "black";
             });
+            */
+            
             row.appendChild(button);
         }
         gridContainer.appendChild(row);
@@ -73,6 +92,7 @@ function generateGrid(){
 
 document.addEventListener("click",function(e){
     const target = e.target;
+
     if(target.className == "pixel"){
         var dict = {};
         dict["id"] = target.id;
@@ -127,7 +147,7 @@ function undoColor(){
     //add it to redoStack
     redoStack.push(lastPixel);
     //change color of pixel
-    document.getElementById(lastPixel.id).style.backgroundColor = lastPixel.color == "black" ? "white" : "black";
+    document.getElementById(lastPixel.id).style.backgroundColor = lastPixel.color != "white" ? "white" : lastPixel.color;
 }
 
 function redoColor(){
@@ -172,3 +192,17 @@ function SaveBoard(){
 window.onresize = function(event) {
     generateGrid();
 };
+
+function colorChange(target){
+    colorPicker.value = target;
+}
+
+//function to convert RGB to HEX
+function rgbToHex(rgb){
+    //remove spaces
+    rgb = rgb.replace(/\s/g,'');
+    //split rgb values
+    rgb = rgb.match(/^rgb\((\d+),(\d+),(\d+)\)$/);
+    //convert to hex
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}

@@ -19,25 +19,37 @@
     <main class="playArea">
         <div class="controls">
             <!-- take input from the user to generate the matrix grid using dropdowns -->
-            <div class="rowControl">
-                <label for="rows">Grid size:</label> &nbsp;
-                        <select name="rows" id="rows" class="dropdown">
-                            <option value="5" selected>5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                        </select> &nbsp; &nbsp;
-                <button class="btn button btnControl" id="generateButton" onclick="generateGrid();">Generate</button>
-                <button class="btn button btnControl" id="clearButton" onclick="ClearBoard();">Clear Grid</button>                  
+            <div class="primaryControls">
+                <div class="rowControl">
+                    <label for="rows">Grid size:</label> &nbsp;
+                            <select name="rows" id="rows" class="dropdown">
+                                <option value="5" selected>5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select> &nbsp; &nbsp;
+                    </div>
+                <div>
+                    <button class="btn button btnControl btn-primary" id="generateButton" onclick="generateGrid();">Generate</button>
+                    <button class="btn button btnControl btn-primary" id="clearButton" onclick="ClearBoard();">Clear Grid</button>                  
+                </div>
             </div>
+
+            
         </div>
         <div class="controls">
-            <div class="rowControl">
-                <button class="btn button fa fa-undo" id="undoButton" onclick="undoColor();"></button>
-                <button class="btn button fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>
-                <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
-            </div>
+            <div class="secondaryControls">
+                <div class="colorChange">
+                    <label for="colorPicker">Color:</label>
+                    <input type = "color" id="colorPicker" value="#000000" onchange="colorChange(this.value);">
+                </div>
+                <div>
+                    <button class="btn button fa fa-undo btn-secondary" id="undoButton" onclick="undoColor();"></button>
+                    <button class="btn button fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>
+                    <button class="btn button btnControl btn-success" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
+                </div>
+               </div>
         </div>
         <div class="gridContainer" id="gridContainer">
         </div>
