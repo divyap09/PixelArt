@@ -92,6 +92,8 @@ footer{
     display: flex;
     justify-content: center;
     height: 60px;
+    padding: 5px;
+    margin-top: 5px;
 }
 
 

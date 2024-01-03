@@ -29,20 +29,19 @@
                             <option value="50">50</option>
                         </select> &nbsp; &nbsp;
                 <button class="btn button btnControl" id="generateButton" onclick="generateGrid();">Generate</button>
-                <button class="btn button btnControl" id="clearButton" onclick="ClearBoard();">Clear Grid</button>
-                <button class="btn button fa fa-undo" id="undoButton" onclick="undoColor();"></button>
-                <button class="btn button fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>      
+                <button class="btn button btnControl" id="clearButton" onclick="ClearBoard();">Clear Grid</button>                  
             </div>
-            <div class="rowControl">
-                </div>
-        </div>
-        <div class="gridContainer" id="gridContainer">
         </div>
         <div class="controls">
-            <div class="secondaryControls">
+            <div class="rowControl">
+                <button class="btn button fa fa-undo" id="undoButton" onclick="undoColor();"></button>
+                <button class="btn button fas fa-redo-alt" id="redoButton" onclick="redoColor();"></button>
                 <button class="btn button btnControl" id="saveButton" onclick="SaveBoard();" disabled>Save</button>
             </div>
         </div>
+        <div class="gridContainer" id="gridContainer">
+        </div>
+        
         
         
     </main>

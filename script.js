@@ -23,15 +23,6 @@ function generateGrid(){
     if (windowWidth > 1000)
         temp = 4;
 
-    else if(windowWidth > 900)
-        temp = 2;
-
-    else if(windowWidth > 800)
-        temp = 2;
-
-    else if(windowWidth > 700)
-        temp = 2;
-
     else if(windowWidth > 500)
         temp = 2;
     
@@ -44,8 +35,8 @@ function generateGrid(){
         temp = 2;
     }
 
-    gridContainer.style.width = (gridSize+temp)+"px";
-    gridContainer.style.height = (gridSize+temp)+"px";
+    gridContainer.style.width = (gridSize+4)+"px";
+    gridContainer.style.height = (gridSize+4)+"px";
 
     var pixelSize =  Math.ceil(gridSize/size.value);
     console.log(pixelSize,gridSize, temp);
