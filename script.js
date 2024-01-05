@@ -96,6 +96,16 @@ document.addEventListener("click",function(e){
         dict["id"] = target.id;
         dict["color"] = target.style.backgroundColor;
 
+        //if redoOrder is not empty, then clear it
+        if(redoOrder.length > 0){
+            redoOrder = [];
+            for(let i=0;i<redoStack.length;i++){
+                redoStack[i]["color"] = [];
+            }
+        }
+
+
+
         //if top element of undoStack is same as current pixel, then don't push it
         if(undoStack.length > 0){
             if(undoStack[undoStack.length-1]["id"] == dict["id"] && undoStack[undoStack.length-1]["color"] == dict["color"])
@@ -192,9 +202,7 @@ function redoColor(){
             break;
         }
     }
-    //find the last color of this pixe
 
-    
     var findPos = redoStack[index]["color"].length-1;
     lastPixelColor = redoStack[index]["color"][findPos];
    // console.log(lastPixelColor + " index: "+index);    
