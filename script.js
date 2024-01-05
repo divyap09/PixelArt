@@ -4,8 +4,10 @@ var pixels = document.getElementsByClassName("pixel");
 var colorPicker = document.getElementById("colorPicker");
 const gridWidth = 500
 
-undoStack = [];
-redoStack = [];
+var undoStack = [];
+var redoStack = [];
+var undoOrder = [];
+var redoOrder = [];
 
 //disable undo and redo buttons
 document.getElementById("undoButton").disabled = true;
@@ -18,6 +20,10 @@ function generateGrid(){
     gridContainer.innerHTML = "";
     console.log(window.innerWidth)
     windowWidth = window.innerWidth;
+    undoStack = [];
+    redoStack = [];
+    undoOrder = [];
+    redoOrder = [];
 
     
     var gridSize = 500;
@@ -41,8 +47,6 @@ function generateGrid(){
     gridContainer.style.height = (gridSize+4)+"px";
 
     var pixelSize =  Math.ceil(gridSize/size.value);
-    console.log(pixelSize,gridSize, temp);
-
     
     //create size*size buttons and add them in gridContainer
     for(let i=0;i<size.value;i++){
@@ -56,25 +60,18 @@ function generateGrid(){
             //button id = i*size+j
             button.id = i*size.value+j;
 
+            //creating an entry in undoStack for each pixel with id and color array as key value pair
+
             //button width and height
             button.style.width = pixelSize+"px";
             button.style.height = pixelSize+"px";
 
             button.className = "pixel";
-            console.log(colorPicker.value);
             
-            
-
-            if(isGeneratedOnload){
+            //if(isGeneratedOnload){
+                initUndoStack(button);
                 button.style.backgroundColor = "white";
-                isGeneratedOnload = false;
-            }
-            else{
-                //button.style.backgroundColor = document.getElementById("colorPicker").value;
-                button.addEventListener("click",function(){
-                    button.style.backgroundColor = document.getElementById("colorPicker").value;
-                });
-            }
+            //} 
             /*
             button.addEventListener("click",function(){
                 if(button.style.backgroundColor == "black")
@@ -83,40 +80,52 @@ function generateGrid(){
                 button.style.backgroundColor = "black";
             });
             */
-            
             row.appendChild(button);
         }
         gridContainer.appendChild(row);
     }
+    isGeneratedOnload = false;
 }
 
 document.addEventListener("click",function(e){
     const target = e.target;
-
+    
     if(target.className == "pixel"){
+        target.style.backgroundColor = document.getElementById("colorPicker").value;
         var dict = {};
         dict["id"] = target.id;
         dict["color"] = target.style.backgroundColor;
-        undoStack.push(dict);
-        console.log(undoStack);
+
+        //if top element of undoStack is same as current pixel, then don't push it
+        if(undoStack.length > 0){
+            if(undoStack[undoStack.length-1]["id"] == dict["id"] && undoStack[undoStack.length-1]["color"] == dict["color"])
+                return;
+        }
+        //undoStack.push(dict);
+        //the find the button in undoStack and append its color
+        for(let i=0;i<undoStack.length;i++){
+            if(undoStack[i]["id"] == dict["id"]){
+                undoStack[i]["color"].push(dict["color"]);
+            }
+        }
+        undoOrder.push(target.id);
     }
 
-
-    if(undoStack.length > 0)
+    if(undoOrder.length > 0){
         document.getElementById("undoButton").disabled = false;
-    else
+        document.getElementById("saveButton").disabled = false;
+    }
+        
+    else{
+        document.getElementById("saveButton").disabled = true;
         document.getElementById("undoButton").disabled = true;
-
-    if(redoStack.length > 0)
+    }
+       
+    if(redoOrder.length > 0)
         document.getElementById("redoButton").disabled = false;
     else
         document.getElementById("redoButton").disabled = true;
-
-    if(undoStack.length > 0)
-        document.getElementById("saveButton").disabled = false;
-    else
-        document.getElementById("saveButton").disabled = true;
-
+  
 });
 
 /*
@@ -138,28 +147,58 @@ for(let j=0;j<size.value;j++){
 */
 
 function undoColor(){
-    if(undoStack.length == 0)
+    if(undoOrder.length == 0){
         return;
+    }
 
-    //pop last element from undoStack
-    let lastPixel = undoStack.pop();
+    let lastPixel = undoOrder.pop();
+    redoOrder.push(lastPixel);
+    
+    var lastPixelColor = "";
+    var index = -1;
+    //from undoStack, find the last color of this pixel
+    for(let i=0;i<undoStack.length;i++){
+        if(undoStack[i]["id"] == lastPixel){
+            var temp = undoStack[i]["color"].pop();
+            redoStack[i]["color"].push(temp);
+            index = i;
+            break;
+        }
+    }
+    
+    //find the last color of this pixel
+    var findPos = undoStack[index]["color"].length-1;
+    lastPixelColor = undoStack[index]["color"][findPos];
 
-    //add it to redoStack
-    redoStack.push(lastPixel);
-    //change color of pixel
-    document.getElementById(lastPixel.id).style.backgroundColor = lastPixel.color != "white" ? "white" : lastPixel.color;
+    document.getElementById(lastPixel).style.backgroundColor = lastPixelColor; //lastPixel.color;
+   
 }
 
 function redoColor(){
-    if(redoStack.length == 0)
+    if(redoOrder.length == 0)
         return;
 
-    //pop last element from redoStack
-    let lastPixel = redoStack.pop();
-    //add it to undoStack
-    undoStack.push(lastPixel);
-    //change color of pixel
-    document.getElementById(lastPixel.id).style.backgroundColor = lastPixel.color;
+    let lastPixel = redoOrder.pop();
+    undoOrder.push(lastPixel);
+
+    var lastPixelColor = "";
+    var index = -1;
+    //from redoStack, find the last color of this pixel
+    for(let i=0;i<redoStack.length;i++){
+        if(redoStack[i]["id"] == lastPixel){
+            var temp = redoStack[i]["color"].pop();
+            undoStack[i]["color"].push(temp);
+            index = i;
+            break;
+        }
+    }
+    //find the last color of this pixe
+
+    
+    var findPos = redoStack[index]["color"].length-1;
+    lastPixelColor = redoStack[index]["color"][findPos];
+   // console.log(lastPixelColor + " index: "+index);    
+    document.getElementById(lastPixel).style.backgroundColor = temp; //lastPixelColor;
 }
 
 function ClearBoard(){
@@ -167,8 +206,13 @@ function ClearBoard(){
     for(let i=0;i<buttons.length;i++){
         buttons[i].style.backgroundColor = "white";
     }
-    undoStack = [];
-    redoStack = [];
+    undoOrder = [];
+    redoOrder = [];
+
+    for(let i=0;i<undoStack.length;i++){
+        undoStack[i]["color"] = ["rgb(255,255,255)"];
+        redoStack[i]["color"] = [];
+    }
 }
 
 function SaveBoard(){
@@ -197,12 +241,32 @@ function colorChange(target){
     colorPicker.value = target;
 }
 
-//function to convert RGB to HEX
-function rgbToHex(rgb){
-    //remove spaces
-    rgb = rgb.replace(/\s/g,'');
-    //split rgb values
-    rgb = rgb.match(/^rgb\((\d+),(\d+),(\d+)\)$/);
-    //convert to hex
-    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+//function to convert RGB to #hex
+function rgbToHex(color){
+    var hex = "#";
+    for(let i=0;i<color.length;i++){
+        var temp = parseInt(color[i]);
+        hex += temp.toString(16);
+    }
+    return hex;
+}
+
+
+//initializing undoStack
+function initUndoStack(target){
+
+    var dict = {
+        "id": target.id,
+        "color": ["rgb(255,255,255)"]
+    };
+    undoStack.push(dict);
+    initRedoStack(target);
+}
+
+function initRedoStack(target){
+    var dict = {
+        "id": target.id,
+        "color": []
+    };
+    redoStack.push(dict);
 }
